@@ -18,7 +18,7 @@ $app = new App([
 $container = $app->getContainer();
 
 $container['view'] = function ($container) {
-    $view = new Twig('path/to/templates', [
+    $view = new Twig(__DIR__ . '/../templates', [
         'cache' => 'path/to/cache'
     ]);
 
