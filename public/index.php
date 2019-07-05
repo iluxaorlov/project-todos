@@ -11,7 +11,13 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new App([
     'settings' => [
-        'displayErrorDetails' => true
+        'displayErrorDetails' => true,
+        'database' => [
+            'dbname' => 'projecttodos',
+            'host' => 'localhost',
+            'user' => 'root',
+            'pass' => ''
+        ]
     ]
 ]);
 
@@ -19,7 +25,7 @@ $container = $app->getContainer();
 
 $container['view'] = function ($container) {
     $view = new Twig(__DIR__ . '/../templates', [
-        'cache' => 'path/to/cache'
+        'cache' => false
     ]);
 
     $router = $container->get('router');
