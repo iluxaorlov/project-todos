@@ -6,11 +6,11 @@ class TaskMigration extends AbstractMigration
 {
     public function up()
     {
-        $table = $this->table('task', ['id' => false, 'primary_key' => 'id']);
+        $table = $this->table('task');
         $table
-            ->addColumn('id', 'string')
             ->addColumn('text', 'string')
             ->addColumn('complete', 'boolean', ['default' => false])
+            ->addColumn('date', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->create();
     }
 

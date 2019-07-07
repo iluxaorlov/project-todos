@@ -2,10 +2,20 @@
 
 namespace App\Controller;
 
-class MainController extends AbstractController
+use Slim\Http\Request;
+use Slim\Http\Response;
+use PDO;
+
+class MainController extends BaseController
 {
-    public function index($request, $response)
+    public function index(Request $request, Response $response)
     {
-        return $this->container->view->render($response, 'index/index.twig');
+        $statement = $this->database->prepare('SELECT * FROM task;');
+        $statement->execute();
+        $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->view->render($response, 'index/index.twig', [
+            'tasks' => $tasks
+        ]);
     }
 }
