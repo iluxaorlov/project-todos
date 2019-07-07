@@ -1,3 +1,17 @@
-{% for task in tasks %}
-    <p>{{ task.text }}</p>
-{% endfor %}
+<form id="form" action="/api" method="post">
+    <input id="text" type="text" autocomplete="off">
+</form>
+<div id="tasks">
+    {% for task in tasks %}
+        <div id="{{ task.id }}" class="task" style="display: flex; justify-content: center; align-items: center;">
+            {% if task.complete == 0 %}
+                <button class="task__complete">o</button>
+            {% else %}
+                <button class="task__complete">v</button>
+            {% endif %}
+            <p class="task__text">{{ task.text }}</p>
+            <button class="task__delete">x</button>
+        </div>
+    {% endfor %}
+</div>
+<script src="./public/app.js"></script>

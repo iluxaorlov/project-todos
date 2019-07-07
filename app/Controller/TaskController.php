@@ -20,13 +20,16 @@ class TaskController extends BaseController
 
         if ($text) {
             // creating an sql query
-            $query = 'INSERT INTO task (text) VALUES (:text);';
+            $query = 'INSERT INTO task (text, token) VALUES (:text, :token);';
             // executing query
-            $this->query($query, ['text' => $text]);
+            $this->query($query, [
+                'text' => $text,
+                'token' => session_id()
+            ]);
             // getting last id
             $lastInsertId = $this->database->lastInsertId();
             // finding task
-            $task = $this->getTaskById($lastInsertId);
+            $task = $this->findOneById($lastInsertId);
 
             if ($task) {
                 // returning json with task
@@ -51,7 +54,7 @@ class TaskController extends BaseController
 
         if ($id) {
             // finding task
-            $task = $this->getTaskById($id);
+            $task = $this->findOneById($id);
 
             if ($task) {
                 // returning json with task
@@ -91,7 +94,7 @@ class TaskController extends BaseController
             // executing query
             $this->query($query, $parametersToValues);
             // finding task
-            $task = $this->getTaskById($id);
+            $task = $this->findOneById($id);
 
             if ($task) {
                 // returning json with updated task
@@ -119,7 +122,7 @@ class TaskController extends BaseController
 
         if ($id) {
             // finding task
-            $task = $this->getTaskById($id);
+            $task = $this->findOneById($id);
 
             if ($task) {
                 // creating an sql query
@@ -137,35 +140,5 @@ class TaskController extends BaseController
 
         // returning json with error
         return $response->withJson(['error' => 'Bad request'])->withStatus(400);
-    }
-
-    /**
-     * @param string $id
-     * @return array|null
-     */
-    private function getTaskById(string $id): ?array
-    {
-        // creating an sql query
-        $query = 'SELECT * FROM task WHERE id = :id;';
-
-        // returning object
-        return $this->query($query, ['id' => $id]);
-    }
-
-    /**
-     * @param string $query
-     * @param array $params
-     * @return array|null
-     */
-    private function query(string $query, array $params = []): ?array
-    {
-        $statement = $this->database->prepare($query);
-        $statement->execute($params);
-
-        if ($statement) {
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
-        }
-
-        return null;
     }
 }
