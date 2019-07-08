@@ -1,0 +1,89 @@
+#logotype {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+
+  #logotype__link {
+    display: flex;
+  }
+
+  #logotype__image {
+    min-height: 48px;
+    max-height: 96px;
+    height: 10vw;
+  }
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25), 0 32px 64px 0 rgba(0, 0, 0, 0.25);
+  margin-bottom: 16px;
+
+  #form__text {
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    border-radius: 0;
+    resize: none;
+
+    &::placeholder {
+      color: $secondColor;
+      font-weight: 400;
+    }
+  }
+
+  #tasks {
+    display: flex;
+    flex-direction: column;
+
+    .task {
+      display: flex;
+      border-top: solid 1px $secondColor;
+
+      &:hover .task__destroy {
+        visibility: visible;
+      }
+
+      .task__check, .task__uncheck, .task__destroy {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        min-width: 51px;
+        border: none;
+        cursor: pointer;
+        background: none;
+        border-radius: 16px;
+      }
+
+      .task__check {
+        color: $firstColor;
+      }
+
+      .task__uncheck {
+        color: $secondColor;
+      }
+
+      .task__text {
+        width: 100%;
+        padding: 16px 0;
+        font-size: 16px;
+        border: none;
+        background: none;
+        color: #000000;
+        resize: none;
+        cursor: default;
+        transition: color 250ms linear;
+      }
+
+      .task__destroy {
+        color: #ff8080;
+      }
+    }
+  }
+}

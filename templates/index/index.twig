@@ -1,17 +1,31 @@
-<form id="form" action="/api" method="post">
-    <input id="text" type="text" autocomplete="off">
-</form>
-<div id="tasks">
-    {% for task in tasks %}
-        <div id="{{ task.id }}" class="task" style="display: flex; justify-content: center; align-items: center;">
-            {% if task.complete == 0 %}
-                <button class="task__complete">o</button>
-            {% else %}
-                <button class="task__complete">v</button>
-            {% endif %}
-            <p class="task__text">{{ task.text }}</p>
-            <button class="task__delete">x</button>
+{% extends 'base.twig' %}
+
+{% block title %}Todos{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div id="logotype">
+            <a id="logotype__link" href="/"><img id="logotype__image" src="./public/img/logotype.svg" alt="Todos"></a>
         </div>
-    {% endfor %}
-</div>
-<script src="./public/app.js"></script>
+        <form id="form" action="/api" method="post">
+            <textarea id="form__text" name="text" rows="1" placeholder="Что нужно запомнить?"></textarea>
+
+            <div id="tasks">
+                {% for task in tasks %}
+                    <div id="{{ task.id }}" class="task">
+                        {% if task.complete == 1 %}
+                            <div class="task__check"><i class="far fa-check-circle"></i></div>
+                            <textarea class="task__text" rows="1" style="text-decoration: line-through; color: rgb(207, 229, 217);">{{ task.text }}</textarea>
+                        {% endif %}
+                        {% if task.complete == 0 %}
+                            <div class="task__uncheck"><i class="far fa-circle"></i></div>
+                            <textarea class="task__text" rows="1" style="text-decoration: none; color: rgb(0, 0, 0);">{{ task.text }}</textarea>
+                        {% endif %}
+                        <div class="task__destroy"><i class="fas fa-times"></i></div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

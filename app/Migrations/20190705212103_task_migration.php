@@ -9,7 +9,7 @@ class TaskMigration extends AbstractMigration
         $table = $this->table('task');
         $table
             ->addColumn('text', 'string')
-            ->addColumn('complete', 'boolean', ['default' => false])
+            ->addColumn('check', 'boolean', ['default' => false])
             ->addColumn('date', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('token', 'string')
             ->create();
