@@ -24,20 +24,16 @@ abstract class BaseController
      */
     protected function findOneById(string $id): ?array
     {
-        // creating an sql query
         $query = 'SELECT * FROM task WHERE id = :id;';
 
-        // returning object
         return $this->query($query, ['id' => $id])[0];
     }
 
-    protected function findByToken(string $token)
+    protected function findAllBySession(string $token): array
     {
-        // creating an sql query
-        $query = 'SELECT * FROM task WHERE token = :token;';
+        $query = 'SELECT * FROM task WHERE session = :session;';
 
-        // returning object
-        return $this->query($query, ['token' => $token]);
+        return $this->query($query, ['session' => $token]);
     }
 
     /**

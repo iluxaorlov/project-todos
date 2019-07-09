@@ -1,6 +1,8 @@
 let inProgress = false;
+let temporaryText;
 
 export default function(item) {
+    temporaryText = item.value.trim();
     item.style.cursor = 'text';
     item.focus();
 
@@ -31,9 +33,16 @@ function request(item) {
         if (this.readyState !== 4) return;
 
         if (this.status === 200) {
-            inProgress = false;
-            item.value = text;
+            if (this.responseText) {
+                let json = JSON.parse(this.responseText);
+                item.style.cursor = 'default';
+                item.value = json.text;
+                inProgress = false;
+            }
+        } else {
             item.style.cursor = 'default';
+            item.value = temporaryText;
+            inProgress = false;
         }
     };
 

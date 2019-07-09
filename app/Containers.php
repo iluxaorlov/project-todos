@@ -23,10 +23,14 @@ $container['view'] = function ($container) {
 $container['database'] = function ($container) {
     $settings = $container['settings']['database'];
 
-    return new PDO('mysql:dbname=' . $settings['dbname'] . ';host=' . $settings['host'],
+    $pdo = new PDO('mysql:dbname=' . $settings['dbname'] . ';host=' . $settings['host'],
         $settings['user'],
         $settings['pass']
     );
+
+    $pdo->exec('SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci');
+
+    return $pdo;
 };
 
 $container['notFoundHandler'] = function ($container) {

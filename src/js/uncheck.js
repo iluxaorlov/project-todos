@@ -2,7 +2,7 @@ export default function(item) {
     let id = item.parentElement.id;
     let xhr = new XMLHttpRequest();
     let json = JSON.stringify({
-        "complete": 0
+        "status": 0
     });
 
     xhr.onreadystatechange = function() {
@@ -10,7 +10,7 @@ export default function(item) {
 
         if (this.status === 200) {
             item.className = 'task__uncheck';
-            item.innerHTML = '<i class="far fa-circle"></i>';
+            item.innerHTML = '<i class="fas fa-check-circle"></i>';
             item.nextElementSibling.style.textDecoration = 'none';
             item.nextElementSibling.style.color = '#000000';
         }

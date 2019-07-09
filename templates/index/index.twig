@@ -9,23 +9,21 @@
         </div>
         <form id="form" action="/api" method="post">
             <textarea id="form__text" name="text" rows="1" placeholder="Что нужно запомнить?"></textarea>
-
             <div id="tasks">
                 {% for task in tasks %}
                     <div id="{{ task.id }}" class="task">
-                        {% if task.complete == 1 %}
-                            <div class="task__check"><i class="far fa-check-circle"></i></div>
+                        {% if task.status == 1 %}
+                            <div class="task__check"><i class="fas fa-check-circle"></i></div>
                             <textarea class="task__text" rows="1" style="text-decoration: line-through; color: rgb(207, 229, 217);">{{ task.text }}</textarea>
                         {% endif %}
-                        {% if task.complete == 0 %}
-                            <div class="task__uncheck"><i class="far fa-circle"></i></div>
+                        {% if task.status == 0 %}
+                            <div class="task__uncheck"><i class="fas fa-check-circle"></i></div>
                             <textarea class="task__text" rows="1" style="text-decoration: none; color: rgb(0, 0, 0);">{{ task.text }}</textarea>
                         {% endif %}
-                        <div class="task__destroy"><i class="fas fa-times"></i></div>
+                        <div class="task__destroy"><i class="fas fa-times-circle"></i></div>
                     </div>
                 {% endfor %}
             </div>
-
         </form>
     </div>
 {% endblock %}

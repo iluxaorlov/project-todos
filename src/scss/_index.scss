@@ -18,10 +18,10 @@
 #form {
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
+  border-radius: 8px;
   background-color: #ffffff;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25), 0 32px 64px 0 rgba(0, 0, 0, 0.25);
-  margin-bottom: 16px;
+  margin-bottom: 96px;
 
   #form__text {
     padding: 16px;
@@ -30,6 +30,7 @@
     background: none;
     border-radius: 0;
     resize: none;
+    overflow: hidden;
 
     &::placeholder {
       color: $secondColor;
@@ -79,6 +80,7 @@
         resize: none;
         cursor: default;
         transition: color 250ms linear;
+        overflow: hidden;
       }
 
       .task__destroy {

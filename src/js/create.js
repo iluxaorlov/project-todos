@@ -1,3 +1,5 @@
+import autosize from './autosize';
+
 export default function() {
     let text = document.getElementById('form__text').value.trim();
     let xhr = new XMLHttpRequest();
@@ -8,10 +10,13 @@ export default function() {
     xhr.onreadystatechange = function() {
         if (this.readyState !== 4) return;
 
-        if (this.status === 201) {
+        if (this.status === 200) {
             if (this.responseText) {
-                document.getElementById('form__text').value = '';
-                document.getElementById('form__text').blur();
+                let formText = document.getElementById('form__text');
+                formText.value = '';
+                formText.style.height = '19px';
+                formText.blur();
+                formText.focus();
                 insert(this.responseText);
             }
         }
@@ -30,14 +35,15 @@ function insert(json) {
     document.getElementById('tasks').insertAdjacentElement('beforeend', task);
 
     insertCheck(task);
-    insertText(task, object);
+    let text = insertText(task, object);
     insertDestroy(task);
+    autosize(text);
 }
 
 function insertCheck(task) {
     let check = document.createElement('div');
     check.className = 'task__uncheck';
-    check.innerHTML = '<i class="far fa-circle"></i>';
+    check.innerHTML = '<i class="fas fa-check-circle"></i>';
     task.insertAdjacentElement('beforeend', check);
 }
 
@@ -47,11 +53,13 @@ function insertText(task, object) {
     text.rows = 1;
     text.value = object.text;
     task.insertAdjacentElement('beforeend', text);
+
+    return text;
 }
 
 function insertDestroy(task) {
     let destroy = document.createElement('div');
     destroy.className = 'task__destroy';
-    destroy.innerHTML = '<i class="fas fa-times"></i>';
+    destroy.innerHTML = '<i class="fas fa-times-circle"></i>';
     task.insertAdjacentElement('beforeend', destroy);
 }

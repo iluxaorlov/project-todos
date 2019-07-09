@@ -9,7 +9,7 @@ class MainController extends BaseController
 {
     public function index(Request $request, Response $response)
     {
-        $tasks = $this->findByToken(session_id());
+        $tasks = $this->findAllBySession(session_id());
 
         return $this->view->render($response, 'index/index.twig', [
             'tasks' => $tasks
