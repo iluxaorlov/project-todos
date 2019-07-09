@@ -18,7 +18,7 @@
 #form {
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  border-radius: 4px;
   background-color: #ffffff;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25), 0 32px 64px 0 rgba(0, 0, 0, 0.25);
   margin-bottom: 96px;
@@ -50,7 +50,7 @@
         visibility: visible;
       }
 
-      .task__check, .task__uncheck, .task__destroy {
+      .task__check {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -60,13 +60,11 @@
         cursor: pointer;
         background: none;
         border-radius: 16px;
-      }
-
-      .task__check {
         color: $firstColor;
       }
 
       .task__uncheck {
+        @extend .task__check;
         color: $secondColor;
       }
 
@@ -81,9 +79,11 @@
         cursor: default;
         transition: color 250ms linear;
         overflow: hidden;
+        font-weight: 400;
       }
 
       .task__destroy {
+        @extend .task__check;
         color: #ff8080;
       }
     }

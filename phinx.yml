@@ -13,7 +13,7 @@ environments:
         pass: ''
         port: 3306
         charset: utf8mb4
-        collate: utf8mb4_bin
+        collate: utf8mb4_unicode_ci
 
     development:
         adapter: mysql
@@ -23,7 +23,7 @@ environments:
         pass: ''
         port: 3306
         charset: utf8mb4
-        collate: utf8mb4_bin
+        collate: utf8mb4_unicode_ci
 
     testing:
         adapter: mysql
@@ -33,6 +33,6 @@ environments:
         pass: ''
         port: 3306
         charset: utf8mb4
-        collate: utf8mb4_bin
+        collate: utf8mb4_unicode_ci
 
 version_order: creation

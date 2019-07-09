@@ -11,6 +11,7 @@ $secondColor: #cfe5d9;
     margin-right: calc(100% - 100vw);
     overflow-x: hidden;
     background-color: $secondColor;
+    min-width: 320px;
 
     .container {
       max-width: 640px;
